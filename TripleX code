@@ -1,0 +1,56 @@
+#include <iostream>
+#include <ctime>
+using namespace std;
+
+
+bool PlayGame(int difficulty) {
+
+	int a;
+	int b;
+	int c;
+	
+	const int A = rand() % difficulty + 5;
+	const int B = rand() % difficulty + 5;
+	const int C = rand() % difficulty + 5;
+		
+	int Sum = A + B + C;
+	int product = A * B * C;
+	cout << "There are three numbers which add up to " << Sum << endl;
+	cout << "They have a product of " << product << endl;
+	cout << "Can you guess the numbers? " << endl;
+	cout << "You are at level " << difficulty << endl;
+	cout << "Enter your guesses: ";
+	cin >> a >> b >> c;
+	int GuessSum = a + b + c;
+	int GuessProduct = a * b * c;
+
+	//Check if guess is correct
+	if (GuessProduct == product && GuessSum == Sum) {
+		cout << "Well done Detecttive!!!\n" << endl;
+		return true;
+	}
+	else {
+		cout << "Careful Detective" << endl;
+		cout << "Try again" << endl;
+		return false;
+	}
+}
+int main() 
+{
+	srand(time(NULL));
+	int LevelDifficulty = 1;
+	const int MaxDifficulty=5;
+	while (LevelDifficulty<=MaxDifficulty)//Loop until all levels are completed
+	{
+		bool bLevelComplete = PlayGame(LevelDifficulty);
+		cin.clear();
+		cin.ignore();
+		if (bLevelComplete)
+		{
+			//Increase difficulty
+			++LevelDifficulty;
+		}
+	}
+	cout << "Congratulations You have creacked the code";
+	
+}
